@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- Maven模块版本，目前我们一般都取值4.0.0 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 整个系统的名称，若子项目不做配置则继承父级项目 -->
+    <groupId>cn.che</groupId>
+    <!-- 子模块名称 -->
+    <artifactId>cloudtemplate</artifactId>
+    <!-- 版本，若子项目不做配置则继承父级项目 -->
+    <version>0.0.1-SNAPSHOT</version>
+
+    <!--
+        打包类型，可取值：pom、jar、war等等；
+        所有的父级项目的packaging都为pom，子项目的只能选择jar、war，默认是jar类型；
+        如果不作配置，maven会将该项目打成jar包，这个配置用于package的phase；
+        如果是需要部署的项目，则需要打包成war类型，如果只是内部调用或者是作服务使用，则推荐打包成jar类型；
+    -->
+    <packaging>pom</packaging>
+
+    <!-- 项目名称，可选 -->
+    <name>cloudtemplate</name>
+    <!-- 项目描述，可选 -->
+    <description>cloudtemplate project for Spring Boot</description>
+
+    <properties>
+        <!--配置项目编码 spring-boot-starter-parent中有声明，可省略 -->
+        <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
+        <!--配置项目编译打包的java版本 spring-boot-starter-parent中有声明，可省略-->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <!-- 通过modules标签将项目的所有子项目引用进来，在build父级项目时，会根据子模块的相互依赖关系整理一个build顺序，然后依次build。 -->
+    <modules>
+        <module>dependencies</module>
+        <module>parent</module>
+        <module>modela</module>
+        <module>modelb</module>
+        <module>discovery</module>
+        <module>gateway</module>
+        <module>common</module>
+        <module>config</module>
+        <module>hystrixmodel</module>
+    </modules>
+</project>

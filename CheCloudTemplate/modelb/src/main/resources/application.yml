@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: modelb
+
+server:
+  port: 8102
+
+eureka:
+  instance:
+    preferIpAddress: true
+    #leaseRenewalIntervalInSeconds: 10
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8100/eureka/
+
+test:
+  name: modelb
+  secret: 666666

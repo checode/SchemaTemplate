@@ -1,0 +1,43 @@
+############################################
+# 配置中心，提供远程配置，配置属性优先级高         #
+############################################
+server:
+  port: 8881
+
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          # git仓库本地缓存地址（建议配置，一些linux系统下会不定时清理临时目录从而引发找不到配置异常,所以可将此目录设置为非临时目录下的目录来避免）
+          basedir: F:/repo-temp
+          # 强力拉去远程配置（建议配置，防止本地配置错误配置）
+          force-pull: true
+          # 在启动时克隆仓库至本地（建议配置，便于及早发现错误）
+          clone-on-start: true
+          default-label: master
+          # 子目录名称，多个以逗号隔开，配置则搜索子目录下配置文件
+          ## 配置属性优先级（主目录优先级最低，最后配置的子目录优先级最高）
+          search-paths: sub
+          # 本地配置地址,linux系统下使用file://前缀
+          uri: file:///F:/config-repo
+          # 码云git远程配置地址（远程配置修改后自动生效，不需要重启配置中心，但客户端重启才可以生效）
+          #uri: https://gitee.com/cheai/cloudtemplate-config-repo.git
+          # github远程配置地址
+#          uri: https://github.com/checode/config-repo.git
+          username: gituser
+          password: gitpwd
+          repos:
+            # 模式匹配和多个存储库，pattern：{application}/{profile}，可使用通配符
+            ## 多个用逗号隔开，或者以数组形式表示
+            ## 若无匹配项则默认加载spring.cloud.config.server.git.uri
+            test-memory:
+              # pattern: modela,modelb
+              pattern:
+                - modela1
+                - modelb
+              uri: file:///F:/config-repo
+              clone-on-start: false
+              search-paths: sub1,sub

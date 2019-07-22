@@ -1,0 +1,46 @@
+server:
+  port: 8101
+  # 程序访问路径，默认为/
+  #servlet:
+  #  path: /modela
+
+spring:
+  application:
+    name: modela1
+  devtools:
+    remote:
+      secret: mysecret
+
+eureka:
+  instance:
+    preferIpAddress: true
+    #leaseRenewalIntervalInSeconds: 10
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8100/eureka/
+
+# SpringCloud 中，默认开启了 /actuator/health、/actuator/info 端点，
+## 其他端点都屏蔽掉了。如果需要开启，自定义开启 endpoints 即可
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ['health','info','beans','env']
+
+# 以下为测试配置（优先引用application配置，若application没配置，则引用bootstrap配置）
+test:
+  name: appliction
+  secret: 123456
+
+test1:
+  name: bb
+  secret:
+    - 654321
+    - 654322
+
+test2:
+  name:
+    - a1
+    - a2

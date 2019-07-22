@@ -1,0 +1,4 @@
+#spring:
+#  config:
+#    # 直接引用spring-cloud-config-server下的configserver.yml配置（配置于引导配置中，不推荐）
+#    name: configserver
